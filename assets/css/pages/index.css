@@ -1,0 +1,195 @@
+
+@import url('../main.css');
+
+.users 
+{
+
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+
+}
+
+.users__center 
+{
+
+    padding: 20px;
+    width: 500px;
+    background-color: var(--s-background);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+}
+
+.users__center-none p 
+{
+
+    padding: 12px 18px;
+    background-color: var(--f-background);
+    border-radius: 20px;
+    color: var(--ghost-text-color);
+    font-size: 9pt;
+
+}
+
+.users__center-none p i 
+{
+
+    opacity: 0.4;
+    margin-right: 10px;
+
+}
+
+.user 
+{
+
+    padding: 15px;
+    width: 100%;
+    background-color: var(--f-background);
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px;
+
+}
+
+.user__default_picture span 
+{
+
+    width: 50px;
+    height: 50px;
+    background-color: var(--s-background);
+    border-radius: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--ghost-text-color);
+    font-size: 12pt;
+
+}
+
+.user__chat p 
+{
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--ghost-text-color);
+    font-size: 9pt;
+
+}
+
+.user__chat p a 
+{
+
+    padding: 8px 20px;
+    background-color: var(--s-background);
+    border-radius: 20px;
+    transition: 0.4s;
+
+}
+
+.user__chat p a i 
+{
+
+    opacity: 0.4;
+    margin-right: 10px;
+
+}
+
+.user__chat p a:hover { background-color: var(--t-background); }
+
+.sign_modal 
+{
+
+    position: fixed;
+    z-index: 9999;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(2, 2, 2, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.sign_modal__center 
+{
+
+    padding: 20px;
+    width: 500px;
+    background-color: var(--s-background);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.sign_modal__center-form__failure { margin-bottom: 40px; }
+
+.sign_modal__center-form__failure p 
+{
+
+    padding: 15px 25px;
+    width: 300px;
+    background-color: rgba(175, 24, 32, 0.1);
+    color: #af1820;
+    font-size: 10pt;
+    text-align: justify;
+
+}
+
+.sign_modal__center-form__area { margin: 12px 0px; }
+
+.sign_modal__center-form__area input, .sign_modal__center form button 
+{
+
+    outline: none;
+    border: none;
+
+}
+
+.sign_modal__center-form__area input
+{
+
+    padding-left: 15px;
+    width: 300px;
+    height: 45px;
+    background-color: var(--f-background);
+    border-radius: 20px;
+    font-size: 9pt;
+
+}
+
+.sign_modal__center form button  
+{
+
+    padding: 15px 25px;
+    width: 100%;
+    background-color: var(--main-color);
+    border-radius: 20px;
+    color: var(--second-text-color);
+    font-size: 10pt;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: 0.4s;
+
+}
+
+.sign_modal__center form button:hover { background-color: var(--dark-main-color); }
+
+@media screen and (max-width: 550px) 
+{
+
+    .users__center, .sign_modal__center
+    {
+
+        width: 100%;
+        border-radius: 0;
+
+    }
+
+}

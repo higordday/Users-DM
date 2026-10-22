@@ -1,0 +1,25 @@
+
+<header class="header">
+
+    <div class="header__home"><a href="/"><i class="fa-solid fa-home"></i>Home</a></div>
+
+    <div class="account">
+
+        <% if (!user) { %>
+
+            <div class="account__off">
+
+                <button type="button" onclick="show_sign_modal('login')" class="account__off-login">Login</button>
+                <button type="button" onclick="show_sign_modal('register')" class="account__off-register"><i class="fa-solid fa-user-circle"></i>Register</button>
+
+            </div>
+
+        <% } else { %>
+
+            <div class="account__on"><p>Logged as <span><%= user.username %></span></p></div>
+
+        <% } %>
+
+    </div>
+
+</header>

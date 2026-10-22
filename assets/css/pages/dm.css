@@ -1,0 +1,189 @@
+
+@import url(../main.css);
+
+.dm 
+{
+
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+
+}
+
+.dm__center 
+{
+
+    padding: 20px;
+    width: 600px;
+    background-color: var(--s-background);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+}
+
+.dm__back a 
+{
+
+    color: var(--muted-text-color);
+    font-size: 9pt;
+
+}
+
+.dm__back a i 
+{
+
+    opacity: 0.4;
+    margin-right: 10px;
+
+}
+
+.dm__center-messages 
+{
+
+    padding: 15px;
+    height: 340px;
+    background-color: var(--f-background);
+    margin-top: 30px;
+
+}
+
+.dm__center-messages__box 
+{
+
+    max-height: 320px;
+    padding-right: 15px;
+    overflow: auto;
+
+}
+
+.dm__center-messages__box::-webkit-scrollbar { width: 10px; }
+
+.dm__center-messages__box::-webkit-scrollbar-track { background-color: var(--t-background); }
+
+.dm__center-messages__box::-webkit-scrollbar-thumb { background-color: var(--s-background); }
+
+.message 
+{ 
+    
+    display: flex; 
+    margin: 15px 0px;
+
+}
+
+.message__from { justify-content: end; }
+
+.message__to { justify-content: start; }
+
+.message__main 
+{
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+}
+
+.message__main-pfp span 
+{
+
+    width: 35px;
+    height: 35px;
+    background-color: var(--s-background);
+    border-radius: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--ghost-text-color);
+    font-size: 10pt;
+
+}
+
+.message__main-msg 
+{
+
+    padding: 10px 20px;
+    border-radius: 10px;
+
+}
+
+.message__main-msg p 
+{
+
+    color: var(--muted-text-color);
+    font-size: 9pt;
+    text-align: justify;
+
+}
+
+.message__main-msg p span { opacity: 0.4; }
+
+.message__from-main__msg { background-color: var(--s-background); }
+
+.message__to-main__msg { background-color: rgba(22, 24, 29, 0.6); }
+
+.send 
+{
+
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+
+}
+
+.send textarea, .send button 
+{
+
+    outline: none;
+    border: none;
+    background-color: var(--f-background);
+    border-radius: 10px;
+    font-size: 9pt;
+    
+}
+
+.send textarea 
+{
+
+    padding: 10px 0px 0px 15px;
+    width: 300px;
+    height: 45px;
+    resize: vertical;
+
+}
+
+.send button 
+{
+
+    padding: 0px 25px;
+    height: 42px;
+    color: var(--muted-text-color);
+    cursor: pointer;
+    transition: 0.4s;
+
+}
+
+.send button i 
+{
+
+    opacity: 0.4;
+    margin-right: 10px;
+
+}
+
+.send button:hover { background-color: var(--t-background); }
+
+@media screen and (max-width: 650px) 
+{
+
+    .dm__center
+    {
+
+        width: 100%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+
+    }
+
+}

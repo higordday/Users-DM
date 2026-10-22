@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Users DM | <%= target_username %></title>
+
+    <link rel="stylesheet" href="/css/pages/dm.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.4/socket.io.js" integrity="sha512-dDCXSKyPaEikucluA6BrNqHngOGByBEhxwwlP+GvVt90XOe0BpmZEdnIJi849R2q9rG23Yzxhiy4uKCdnrJySw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+<body>
+
+    <%- include('partials/header.ejs') %>
+
+    <div class="dm">
+        <section class="dm__center">
+
+            <div class="dm__back"><a href="/" onclick="leave_chat()"><i class="fa-solid fa-arrow-left"></i>Leave Chat</a></div>
+
+            <div class="dm__center-messages">
+                <div class="dm__center-messages__box">
+
+                    <% messages.forEach( (message) => { %>
+
+                        <% if (message.from_username.toLowerCase() == logged_username.toLowerCase()) { %>
+
+                            <div class="message message__from">
+                                <div class="message__main message__from-main">
+
+                                    <div class="message__main-pfp"><span><%= message.from_username[0].toUpperCase() %></span></div>
+
+                                    <div class="message__main-msg message__from-main__msg"><p><span><%= message.from_username %>:</span> <%= message.message %></p></div>
+
+                                </div>
+                            </div>
+
+                        <% } else { %>
+
+                            <div class="message message__to">
+                                <div class="message__main message__to-main">
+
+                                    <div class="message__main-pfp"><span><%= message.from_username[0].toUpperCase() %></span></div>
+
+                                    <div class="message__main-msg message__to-main__msg"><p><span><%= message.from_username %>:</span> <%= message.message %></p></div>
+
+                                </div>
+                            </div>
+
+                        <% } %>
+
+                    <% }); %>
+
+                </div>
+            </div>
+
+            <div class="send">
+                <textarea name="message" id="message_id" placeholder="Message..."></textarea>
+                <button type="button" onclick="send_message()"><i class="fa-solid fa-paper-plane"></i>Send</button>
+
+                <script type="text/javascript">
+
+                    const sio = io('localhost:8000');
+
+                    const chat_id = '<%= chat_id %>';
+
+                    const logged_username = '<%= logged_username %>';
+                    const target_username = '<%= target_username %>';
+
+                    sio.emit('join_chat', chat_id);
+
+                    function leave_chat() { sio.emit('leave_chat', chat_id); }
+
+                    function display_message(to_from, message_content) 
+                    {
+
+                        const messages_area = document.querySelector('.dm__center-messages__box');
+
+                        const message_div = document.createElement('div');
+                        message_div.className = `message message__${to_from}`;
+
+                        const message_div_main = document.createElement('div');
+                        message_div_main.className = `message__main message__${to_from}-main`;
+
+                        const message_div_main_pfp = document.createElement('div');
+                        message_div_main_pfp.className = 'message__main-pfp';
+
+                        message_div_main_pfp.innerHTML = `<span>${logged_username[0].toUpperCase()}</span>`;
+
+                        const message_div_main_msg = document.createElement('div');
+                        message_div_main_msg.className = `message__main-msg message__${to_from}-main__msg`;
+
+                        message_div_main_msg.innerHTML = `<p><span>${logged_username}:</span> ${message_content}</p>`;
+
+                        message_div_main.appendChild(message_div_main_pfp);
+                        message_div_main.appendChild(message_div_main_msg);
+
+                        message_div.appendChild(message_div_main);
+
+                        messages_area.appendChild(message_div);
+
+                        document.getElementById('message_id').value = '';
+
+                    }
+
+                    sio.on('broadcast', (data) => 
+                    { 
+
+                        if (data.from_username == logged_username) { display_message('from', data.message); }
+
+                        if (data.from_username == target_username) { display_message('to', data.message); }
+                    
+                    });
+
+                    function send_message() 
+                    {
+
+                        const message_content = document.getElementById('message_id').value;
+
+                        if ((!message_content) || (message_content == null) || (typeof message_content == 'undefined')) { return; }
+
+                        const message_content_no_spaces = message_content.replace(/\s/g, '');
+
+                        if ((!message_content_no_spaces) || (message_content_no_spaces == null) || (typeof message_content_no_spaces == 'undefined')) { return; }
+
+                        sio.emit('send', { chat: chat_id, from_username: logged_username, to_username: target_username, message: message_content });
+
+                    }
+
+                </script>
+            </div>
+
+        </section>
+    </div>
+
+    
+</body>
+</html>

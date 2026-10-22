@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Users DM | Index</title>
+
+    <link rel="stylesheet" href="/css/pages/index.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+</head>
+<body>
+
+    <% if (failure != '') { %> <script type="text/javascript"> alert('<%= failure %>'); </script> <% } %>
+
+    <% if (success != '') { %> <script type="text/javascript"> alert('<%= success %>'); </script> <% } %>
+
+    <%- include('partials/header.ejs') %>
+
+    <div class="users">
+        <section class="users__center">
+
+            <% if (chats.length == 0) { %>
+
+                <div class="users__center-none"><p><i class="fa-solid fa-info-circle"></i>No Users</p></div>
+
+            <% } else { %>
+
+                <% for (let ci = 0; ci < chats.length; ci++) { %>
+
+                    <% if (((user) && (user.username.toLowerCase()) != (chats[ci].username.toLowerCase())) || (!user)) { %>
+
+                        <div class="user">
+                            <div class="user__default_picture"><span><%= chats[ci].username[0].toUpperCase() %></span></div>
+
+                            <div class="user__chat"><p><%= chats[ci].username %> <a href="/chat/<%= chats[ci].username %>"><i class="fa-solid fa-message"></i>Chat</a></p></div>
+                        </div>
+
+                    <% } %>
+
+                <% } %>
+
+            <% } %>
+
+        </section>
+    </div>
+
+    <div class="sign_modal" id="sign_modal__login">
+        <section class="sign_modal__center">
+
+            <form action="/users/login" method="post">
+
+                <% if (typeof login_form_failure !== 'undefined') { %> <div class="sign_modal__center-form__failure"><p><%= login_form_failure %></p></div> <% } %>
+
+                <div class="sign_modal__center-form__area"><input type="text" name="login" placeholder="Login"></div>
+
+                <div class="sign_modal__center-form__area"><input type="password" name="password" placeholder="Password"></div>
+
+                <button type="submit">Login</button>
+
+            </form>
+
+        </section>
+    </div>
+
+    <% if (typeof login_form_failure !== 'undefined') { %> <script type="text/javascript"> document.getElementById('sign_modal__login').style.display = 'flex'; </script> <% } %>    
+
+    <div class="sign_modal" id="sign_modal__register">
+        <section class="sign_modal__center">
+
+            <form action="/users/register" method="post">
+
+                <% if (typeof register_form_failure !== 'undefined') { %> <div class="sign_modal__center-form__failure"><p><%= register_form_failure %></p></div> <% } %>
+
+                <div class="sign_modal__center-form__area">
+                    <input type="text" name="username" id="username_id" placeholder="Username">
+
+                    <script type="text/javascript"> document.getElementById('username_id').addEventListener('keydown', (event) => { if (event.key === ' ') { event.preventDefault(); } }); </script>
+                </div>
+
+                <div class="sign_modal__center-form__area"><input type="password" name="password" placeholder="Password"></div>
+
+                <div class="sign_modal__center-form__area"><input type="password" name="password_confirmation" placeholder="Repeat Password"></div>
+
+                <button type="submit">Register</button>
+
+            </form>
+
+        </section>
+    </div>
+
+    <% if (typeof register_form_failure !== 'undefined') { %> <script type="text/javascript"> document.getElementById('sign_modal__register').style.display = 'flex'; </script> <% } %>    
+
+    <script type="text/javascript">
+
+        const login_sign_modal = document.getElementById('sign_modal__login');
+        const register_sign_modal = document.getElementById('sign_modal__register');
+
+        function show_sign_modal(action) 
+        {
+
+            if (action == 'login') 
+            {
+
+                register_sign_modal.style.display = 'none'; login_sign_modal.style.display = 'flex'; return;
+
+            }
+
+            login_sign_modal.style.display = 'none'; register_sign_modal.style.display = 'flex';
+
+        }
+
+        [login_sign_modal, register_sign_modal].forEach( (sign_modal) => 
+        {
+            sign_modal.addEventListener('click', (event) => 
+            {
+
+                if ((event.target.id == 'sign_modal__login') || (event.target.id == 'sign_modal__register')) { sign_modal.style.display = 'none'; }
+
+            });
+        });
+
+    </script>
+    
+</body>
+</html>

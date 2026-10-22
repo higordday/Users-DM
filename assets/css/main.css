@@ -1,0 +1,141 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+:root
+{
+
+    --main-font: 'Poppins', sans-serif;
+
+    --main-color: #af1820;
+    --dark-main-color: #7c1217;
+
+    --text-color: #ffffff;
+    --muted-text-color: rgba(255, 255, 255, 0.6);
+    --ghost-text-color: rgba(255, 255, 255, 0.4);
+
+    --second-text-color: #000000;
+
+    --f-background: #0d0f14;
+    --s-background: #16181d;
+    --t-background: #24282e;
+    
+}
+
+* 
+{
+
+    padding: 0;
+    margin: 0;
+    font-family: var(--main-font);
+    font-style: normal;
+    font-weight: 500;
+    color: var(--text-color);
+    text-decoration: none;
+    box-sizing: border-box;
+
+}
+
+body { background-color: var(--f-background); }
+
+
+.header 
+{
+
+    padding: 12px 15px;
+    background-color: var(--s-background);
+    border-bottom: 1px solid var(--t-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    flex-wrap: wrap;
+
+}
+
+.header__home a 
+{
+
+    padding: 8px 20px;
+    background-color: var(--f-background);
+    border-radius: 20px;
+    color: var(--muted-text-color);
+    font-size: 9pt;
+    transition: 0.4s;
+
+}
+
+.header__home a i 
+{
+
+    opacity: 0.4;
+    margin-right: 10px;
+
+}
+
+.header__home a:hover { background-color: var(--t-background); }
+
+.account__off 
+{ 
+    
+    display: flex; 
+    gap: 15px;
+
+}
+
+.account__off button
+{
+
+    outline: none;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-size: 9pt;
+    transition: 0.4s;
+    cursor: pointer;
+
+}
+
+.account__off-login 
+{
+
+    background-color: var(--f-background);
+    color: var(--muted-text-color);
+
+}
+
+.account__off-login:hover { background-color: var(--t-background); }
+
+.account__off-register 
+{
+
+    background-color: var(--main-color);
+    color: var(--second-text-color);
+
+}
+
+.account__off-register i 
+{
+
+    color: var(--second-text-color);
+    font-size: 11pt;
+    margin-right: 10px;
+
+}
+
+.account__off-register:hover { background-color: var(--dark-main-color); }
+
+.account__on p 
+{
+
+    color: var(--muted-text-color);
+    font-size: 9pt;
+
+}
+
+.account__on p span 
+{ 
+    
+    opacity: 0.4; 
+    margin-left: 10px;
+
+}
